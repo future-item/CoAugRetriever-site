@@ -61,16 +61,17 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://openreview.net/forum?id=MI4yIBLprs"
-                   class="external-link button is-normal is-rounded is-dark">
+                <!-- <a href="https://openreview.net"
+                   class="external-link button is-normal is-rounded is-dark"> -->
+                  <button class="button is-normal is-rounded is-dark" disabled>
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
-                  <span>TMLR</span>
+                  <span>PAKDD</span>
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2411.18142"
+                <a href="https://arxiv.org/abs/2506.18670"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -80,7 +81,7 @@
               </span>
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/future-item/AutoImagine"
+                <a href="https://github.com/liujm2001/CoAugRetriever"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -88,15 +89,6 @@
                   <span>Code</span>
                   </a>
               </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
-                <a href="https://huggingface.co/collections/future-item/autoimagine"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="far fa-images"></i>
-                  </span>
-                  <span>Data</span>
-                  </a>
             </div>
 
           </div>
@@ -106,6 +98,7 @@
   </div>
 </section>
 
+<!-- 
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
@@ -123,7 +116,7 @@
     </div>
   </div>
 </section>
-
+ -->
 
 
 
@@ -135,7 +128,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-Under pure textual modality, Large Language Models (LLMs) have demonstrated remarkable success in complex reasoning tasks by decomposing them into simpler sub-problems. However, Multimodal Large Language Models (MLLMs) still struggle with some seemingly straightforward visual tasks, such as counting and solving jigsaw puzzles. We argue that these tasks challenge the ability of {\it visual-to-textual conversion}, where MLLMs convert visual information perceived from the input scene, to textual information for further reasoning and generating the answer. If the complexity of the visual input is beyond the perceptual capability of the MLLMs, without decomposing this conversion process, simply scaling inference-time reasoning cannot solve the task because it repeatedly encounters the same perceptual bottleneck. We propose an approach, {\it autonomous imagination}, to enable MLLMs to iteratively modify visual inputs (e.g. isolating objects, rearranging puzzle pieces) into intermediate visual states, decomposing visual-to-textual conversion into closed-loop visual modification steps. We show that, without any retraining, MLLMs can now solve tasks initially beyond their perceptual capability, highlighting that closed-loop visual modification can be an effective way of decomposing the visual reasoning task into solvable substeps.
+Recent advances have explored the use of language models (LLMs) as retrievers by rewriting either user queries or corpus documents. However, such unidirectional augmentation cannot resolve their lexical and stylistic mismatch, limiting recall and robustness. We propose an LLM-based retriever that jointly augments queries and documents, with both policies optimized via reinforcement learning (RL) and minimal human bias. We show that independently training query and document augmentation offers little gain, even when combined at inference, whereas our bidirectional RL framework enables coordinated learning of both policies. The main challenge lies in jointly updating two interdependent policies with entangled rewards. We address this by introducing a reward sampling strategy and a tailored RL algorithm that supports effective joint optimization. Experiments show substantial improvements in sparse and dense retrieval, especially on challenging domains, along with strong cross-benchmark generalization. 
           </p>
         </div>
       </div>
@@ -148,15 +141,14 @@ Under pure textual modality, Large Language Models (LLMs) have demonstrated rema
         <h2 class="title is-3">Method</h2>
         <div class="content has-text-justified">
           <p>
-            The imagination space begins with
-            an unstructured input scene and undergoes an iterative reasoning process. In each cycle, MLLMs first
-            perceive the current state of the imagination space, select an operation to apply, and then reassess the
-            updated imagination space. Upon completing this reasoning sequence, MLLMs generate an answer
-            based on the cumulative context of the process and the final state of the imagination space.
+            Left: Overview of the
+            training pipeline. Right: Reward calculation. One sample is randomly selected from
+            the rollouts for each query and related document, its reward is computed, and the
+            reward is accumulated onto the corresponding rollout sample for estimation.
           </p>
           <figure>
-            <img src="./figure/method.jpg" alt="An overview of our autonomous imagination method">
-            <figcaption>An overview of our autonomous imagination method</figcaption>
+            <img src="./figure/method.jpg" alt="An overview of our bidirectional RL training process">
+            <figcaption>An overview of our bidirectional RL training process</figcaption>
           </figure>
         </div>
       </div>
@@ -164,6 +156,7 @@ Under pure textual modality, Large Language Models (LLMs) have demonstrated rema
     <!--/ Method.. -->
     
     <!-- Paper video. -->
+    <!-- 
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         
@@ -173,7 +166,8 @@ Under pure textual modality, Large Language Models (LLMs) have demonstrated rema
                   type="video/mp4">
         </video>
       </div>
-    </div>
+    </div> 
+    -->
     <!--/ Paper video. -->
   </div>
 </section>
