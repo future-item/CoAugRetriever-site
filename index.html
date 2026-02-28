@@ -103,7 +103,7 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
           <figure>
-            <img src="./figure/teaser.jpg" alt="Alongside ordinary test-time query rewriting, we allow the LLM to pre-compute lightweight augmentations for every document, giving the LLM control over both queries and documents. This query–document co-augmentation widens the action space of the LLM, enabling the exploration of more accurate retrieval policies, especially in challenging collections.">
+            <img src="./figure/method_overview.pdf" alt="Alongside ordinary test-time query rewriting, we allow the LLM to pre-compute lightweight augmentations for every document, giving the LLM control over both queries and documents. This query–document co-augmentation widens the action space of the LLM, enabling the exploration of more accurate retrieval policies, especially in challenging collections.">
             <figcaption>Alongside ordinary test-time query rewriting, we allow the LLM to pre-compute lightweight augmentations for every document, giving the LLM control over both queries and documents. This query–document co-augmentation widens the action space of the LLM, enabling the exploration of more accurate retrieval policies, especially in challenging collections.</figcaption>
           </figure>
       <h2 class="subtitle has-text-centered">
@@ -137,14 +137,31 @@ Recent advances have explored the use of language models (LLMs) as retrievers by
         <h2 class="title is-3">Method</h2>
         <div class="content has-text-justified">
           <p>
-            Left: Overview of the
-            training pipeline. Right: Reward calculation. One sample is randomly selected from
+            We propose an RL-enhanced LLM that jointly optimizes query and document
+            augmentation, aligning their lexical and semantic distributions with the model’s
+            internal knowledge to improve retrieval.
+            
+            To enable joint learning, we introduce a
+            query–document composite sampling strategy that groups queries with their
+            associated documents within the same batch, reducing the training data scale
+            from the full corpus to batch-level operations. For reward computation, retrieval
+            is conducted by executing query rollouts within document rollouts, and the
+            averaged rollout score provides the reward signal.
+            
+            One sample is randomly selected from
             the rollouts for each query and related document, its reward is computed, and the
-            reward is accumulated onto the corresponding rollout sample for estimation.
+            reward is accumulated onto the corresponding rollout sample for estimation. Queries and documents are batched
+            together for reward computation, introducing entanglement, but are separated for ad-
+            vantage calculation and policy updates. Parallelized sampling is used to improve rollout
+            efficiency.
           </p>
           <figure>
-            <img src="./figure/method.jpg" alt="An overview of our bidirectional RL training process">
-            <figcaption>An overview of our bidirectional RL training process</figcaption>
+            <img src="./figure/rl_training.pdf" alt="Overview of the training pipeline and Reward calculation. ">
+            <figcaption>Overview of the training pipeline and Reward calculation. </figcaption>
+          </figure>
+          <figure>
+            <img src="./figure/pipeline_implementation.pdf" alt="Implementation of our RL training pipeline.">
+            <figcaption>Implementation of our RL training pipeline.</figcaption>
           </figure>
         </div>
       </div>
